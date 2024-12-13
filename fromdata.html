@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="img/favicon/safari-pinned-tab.svg"
+      color="#e67e22"
+    />
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#fdf2e9" />
+    <meta name="msapplication-config" content="img/favicon/browserconfig.xml" />
+    <meta name="theme-color" content="#fdf2e9" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
+
+    <!-- JavaScript -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+
+    <title>Smart Eats</title>
+    <style>
+
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          color: #333;
+        }
+    
+        h1 {
+            color: inherit;
+            margin-bottom: 3rem;  
+          font-size: 4rem;
+          text-align: center;
+          margin-top: 30px;
+        }
+    
+        .form-container {
+          max-width: 500px;
+          margin: 0 auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .form-group {
+          margin-bottom: 20px;
+        }
+    
+        label {
+          font-size: 2rem;
+          font-weight: bold;
+          color: #2d2d2d;
+        }
+    
+        input, select, textarea {
+          width: 100%;
+          padding: 10px;
+          margin-top: 5px;
+          border: 2px solid #ccc;
+          border-radius: 5px;
+          font-size: 1.5rem;
+        }
+    
+        button {
+          display: block;
+          width: 100%;
+          padding: 10px;
+          background-color: #ed720d;
+          color: #fff;
+          font-size: 2rem;
+          font-weight: bold;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-top: 20px;
+        }
+    
+        button:hover {
+          background-color: #d4650b;
+        }
+    
+        .hidden {
+          display: none;
+        }
+
+        #welcomeName {
+      font-size: 2.3rem; /* Membuat nama lebih besar */
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #welcomeEmail {
+      font-size: 2.3rem; /* Membuat nama lebih besar */
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+      </style>
+
+</head>
+<body>
+    <body>
+        <header class="header" id="header">
+          <a href="#" class="nav-link">
+            <img class="logo" alt="Smart Eats logo" src="img/logo.png" />
+          </a>
+        </header>
+    
+        <section class="section-cta" id="cta">
+          <div class="container">
+            <div class="ctaa">
+            <div class="cta-text-box">  
+            <h1>SMART EATS</h1>
+            <p class="form-group" id="welcomeName"></p>
+            <p id="welcomeEmail"></p>
+    
+            <!-- Form -->
+            <form id="smartEatsForm">
+              <div class="form-group">
+                <label for="age">Umur</label>
+                <input type="number" id="age" placeholder="Masukkan umur Anda" required />
+              </div>
+    
+              <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <select id="gender" required>
+                  <option value="">Pilih jenis kelamin</option>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+              </div>
+    
+              <div class="form-group">
+                <label for="current-weight">Berat Badan Sekarang (kg)</label>
+                <input type="number" id="current-weight" placeholder="Masukkan berat badan Anda" required />
+              </div>
+    
+              <div class="form-group">
+                <label for="target-weight">Target Berat Badan (kg)</label>
+                <input type="number" id="target-weight" placeholder="Masukkan target berat badan Anda" required />
+              </div>
+    
+              <div class="form-group">
+                <label>Alergi Makanan</label>
+                <select id="allergy" required>
+                  <option value="">Punya alergi makanan?</option>
+                  <option value="Tidak">Tidak</option>
+                  <option value="Punya">Punya</option>
+                </select>
+              </div>
+    
+              <div class="form-group hidden" id="allergyDetailsContainer">
+                <label for="allergy-details">Detail Alergi Makanan</label>
+                <textarea id="allergy-details" placeholder="Tulis jenis makanan yang Anda alergi"></textarea>
+              </div>
+    
+              <button type="submit">Lanjutkan</button>
+            </form>
+          </div>
+        </div>
+        </section>
+    
+        <script>
+          // Menampilkan data dari localStorage
+          const fullName = localStorage.getItem("fullName");
+          const email = localStorage.getItem("email");
+    
+          if (fullName && email) {
+            document.getElementById("welcomeName").textContent =
+              "Nama Lengkap : " + fullName;
+            document.getElementById("welcomeEmail").textContent = "Email : " + email;
+          }
+    
+          // Menampilkan atau menyembunyikan input detail alergi
+          document.getElementById("allergy").addEventListener("change", function () {
+            const allergyDetailsContainer = document.getElementById(
+              "allergyDetailsContainer"
+            );
+            if (this.value === "Punya") {
+              allergyDetailsContainer.classList.remove("hidden");
+            } else {
+              allergyDetailsContainer.classList.add("hidden");
+              document.getElementById("allergy-details").value = ""; // Kosongkan textarea
+            }
+          });
+    
+          // Menangani submit form
+          document.getElementById("smartEatsForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+    
+            // Simpan data form di localStorage
+            const age = document.getElementById("age").value;
+            const gender = document.getElementById("gender").value;
+            const currentWeight = document.getElementById("current-weight").value;
+            const targetWeight = document.getElementById("target-weight").value;
+            const allergy = document.getElementById("allergy").value;
+            const allergyDetails = document.getElementById("allergy-details").value;
+    
+            localStorage.setItem("age", age);
+            localStorage.setItem("gender", gender);
+            localStorage.setItem("currentWeight", currentWeight);
+            localStorage.setItem("targetWeight", targetWeight);
+            localStorage.setItem("allergy", allergy);
+            localStorage.setItem("allergyDetails", allergyDetails);
+    
+            // Redirect ke scan.html
+            window.location.href = "scan.html";
+          });
+        </script>
+      </body>
+    </html>
