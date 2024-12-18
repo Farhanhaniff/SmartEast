@@ -1,11 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartEats Meal Calendar</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="img/favicon/safari-pinned-tab.svg"
+      color="#e67e22"
+    />
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#fdf2e9" />
+    <meta name="msapplication-config" content="img/favicon/browserconfig.xml" />
+    <meta name="theme-color" content="#fdf2e9" />
+
+    <!-- Own Styles -->
+    <link rel="stylesheet" href="src/styles/styles.css" />
+    <link rel="stylesheet" href="src/styles/responsive.css" />
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9fafb;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2rem;
+      color: #FF9800; /* Oren */
+    }
+
+    /* Calendar Styles */
+    .calendar-container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .day {
+      position: relative;
+      background: #f0f4f8;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .day:hover {
+      background-color: #FF9800;
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      white-space: nowrap;
+      display: none;
+    }
+
+    .day:hover .tooltip {
+      display: block;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .meal-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border-radius: 10px;
+      max-width: 400px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .meal-popup img {
+      width: 100%;
+      height: auto;
+    }
+
+    .meal-details {
+      padding: 20px;
+    }
+
+    .meal-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #FF9800;
+    }
+
+    .meal-attributes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .meal-attribute {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .meal-attribute ion-icon {
+      margin-right: 10px;
+      color: #FF9800;
+    }
+
+    .close-btn {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #FF9800;
+    }
+  </style>
 </head>
 <body>
-    YYY
+  <h1>SmartEats Meal Calendar</h1>
+
+  <!-- Calendar Container -->
+  <div class="calendar-container">
+    <div class="calendar">
+      <!-- Days -->
+      <div class="day" onclick="showMeal('Avocado Salad', '400', '92', '4.8', './img/meals/meal-2.jpg')">
+        1
+        <div class="tooltip">Avocado Salad - 400 cal</div>
+      </div>
+      <div class="day" onclick="showMeal('Grilled Chicken', '450', '88', '4.6', './img/meals/makanan.jpg')">
+        2
+        <div class="tooltip">Grilled Chicken - 450 cal</div>
+      </div>
+      <div class="day" onclick="showMeal('Quinoa Bowl', '380', '95', '4.9', './img/meals/makanan1.jpg')">
+        3
+        <div class="tooltip">Quinoa Bowl - 380 cal</div>
+      </div>
+      <div class="day" onclick="showMeal('Pasta Primavera', '500', '85', '4.5', './img/meals/makanan3.jpg')">
+        4
+        <div class="tooltip">Pasta Primavera - 500 cal</div>
+      </div>
+      <!-- Days 5 to 31 -->
+      <script>
+        for (let i = 5; i <= 31; i++) {
+          const meals = [
+            './img/meals/meal-2.jpg',
+            './img/meals/makanan.jpg',
+            './img/meals/makanan1.jpg',
+            './img/meals/makanan3.jpg',
+            'images/smoothie-bowl.jpg',
+          ];
+          const mealName = `Meal Day ${i}`;
+          const imgPath = meals[i % meals.length];
+          document.write(`
+            <div class="day" onclick="showMeal('${mealName}', '300', '90', '4.7', '${imgPath}')">
+              ${i}
+              <div class="tooltip">${mealName} - 300 cal</div>
+            </div>
+          `);
+        }
+      </script>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="closeMeal()"></div>
+
+  <!-- Meal Popup -->
+  <div class="meal-popup" id="meal-popup">
+    <img id="meal-image" src="./img/meals/meal-2.jpg" alt="Meal Image">
+    <div class="meal-details">
+      <p class="meal-title" id="meal-title">Avocado Salad</p>
+      <ul class="meal-attributes">
+        <li class="meal-attribute">
+          <ion-icon name="flame-outline"></ion-icon>
+          <span><strong id="meal-calories">400</strong> calories</span>
+        </li>
+        <li class="meal-attribute">
+          <ion-icon name="restaurant-outline"></ion-icon>
+          <span>NutriScore &reg; <strong id="meal-score">92</strong></span>
+        </li>
+        <li class="meal-attribute">
+          <ion-icon name="star-outline"></ion-icon>
+          <span><strong id="meal-rating">4.8</strong> rating</span>
+        </li>
+      </ul>
+      <a class="close-btn" onclick="closeMeal()">Close</a>
+    </div>
+  </div>
+
+  <!-- Ionicons -->
+  <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons.js"></script>
+
+  <!-- JavaScript -->
+  <script>
+    function showMeal(title, calories, score, rating, image) {
+      document.getElementById('meal-title').innerText = title;
+      document.getElementById('meal-calories').innerText = calories;
+      document.getElementById('meal-score').innerText = score;
+      document.getElementById('meal-rating').innerText = rating;
+      document.getElementById('meal-image').src = image;
+
+      document.getElementById('meal-popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closeMeal() {
+      document.getElementById('meal-popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
